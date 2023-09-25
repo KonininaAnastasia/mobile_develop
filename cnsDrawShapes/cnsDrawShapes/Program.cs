@@ -3,28 +3,82 @@ bool isContinue;
 
 do
 {
-    //не получилось сделать нормальный ромб
-    Console.WriteLine("Меньшая диаганаль полуромба?");
-    int.TryParse(Console.ReadLine(), out int length);
+    //песочные часы
+    Console.WriteLine("Ширина песочных часов?");
+    int.TryParse(Console.ReadLine(), out int wigth);
 
     Console.WriteLine("Символ?");
     string? simbol = Console.ReadLine();
 
     char s = Convert.ToChar(simbol);
 
+
+    for (int i = 0; i < wigth / 2; i++)
+    {
+        Console.Write(new String(' ', i));
+        Console.WriteLine(new String(s, wigth - i * 2));
+    };
+
+    for (int i = wigth / 2; i >= 0; i--)
+    {
+        Console.Write(new String(' ', i));
+        Console.WriteLine(new String(s, wigth - i * 2));
+    };
+
+    Console.WriteLine("");
+
+
+
+    //ромб
+    Console.WriteLine("Длина меньшей диагонали ромба?");
+    int.TryParse(Console.ReadLine(), out int wigth1);
+
+    Console.WriteLine("Символ?");
+    string? simbol2 = Console.ReadLine();
+
+    char sim = Convert.ToChar(simbol);
+
+    for (int i = wigth1 / 2; i > 0; i--)
+    {
+        Console.Write(new String(' ', i));
+        Console.WriteLine(new String(sim, wigth1 - i * 2));
+    };
+    for (int i = 0; i <= wigth1 / 2; i++)
+    {
+        Console.Write(new String(' ', i));
+        Console.WriteLine(new String(sim, wigth1 - i * 2));
+    };
+
+    Console.WriteLine("");
+
+
+
+    //стрела
+    Console.WriteLine("Длина стрелы?");
+    int.TryParse(Console.ReadLine(), out int length);
+
+    Console.WriteLine("Символ?");
+    string? simbol0 = Console.ReadLine();
+
+    char s0 = Convert.ToChar(simbol);
+
     Console.WriteLine("");
 
     for (int i = 1; i < length; i++)
     {
-        Console.WriteLine(new String(s, i));
+        Console.Write(new String(' ', i));
+        Console.WriteLine(new String(s0, i));
     }
 
-    for (int j = length; j > 0; j--)
+    for (int i = length; i > 0; i--)
     {
-        Console.WriteLine(new String(s, j));
+        Console.Write(new String(' ', i));
+        Console.WriteLine(new String(s0, i));
     }
 
     Console.WriteLine("");
+
+
 
     //змейка
     Console.WriteLine("Длина змейки?");
