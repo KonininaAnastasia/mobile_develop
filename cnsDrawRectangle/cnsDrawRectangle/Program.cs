@@ -10,6 +10,11 @@ do
     Console.WriteLine("Ширина?");
     int.TryParse(Console.ReadLine(), out int width);
 
+    Console.WriteLine("Символ?");
+    string? simbol = Console.ReadLine();
+
+    char s = Convert.ToChar(simbol);
+
     string space = "";
     if (length > 0 && width > 0)
     {
@@ -21,22 +26,22 @@ do
 
         if (width > 1)
         {
-            Console.WriteLine(new String('*', length));
+            Console.WriteLine(new String(s, length));
             for (int i = 0; i < width - 2; i++)
             {
                 if (length > 1)
                 {
-                    Console.WriteLine('*' + space + '*');
+                    Console.WriteLine(s + space + s);
                 }
                 else
                 {
-                    Console.WriteLine('*');
+                    Console.WriteLine(s);
                 }
             }
-            Console.WriteLine(new String('*', length));
+            Console.WriteLine(new String(s, length));
         } else
         {
-            Console.WriteLine(new String('*', length));
+            Console.WriteLine(new String(s, length));
         }
 
         Console.WriteLine("Закрасить? [Y/N] ->");
@@ -46,7 +51,7 @@ do
         {
             for (int i = 0; i < width; i++)
             {
-                Console.WriteLine(new String('*', length));
+                Console.WriteLine(new String(s, length));
             }
         }
     } else
