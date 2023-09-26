@@ -36,7 +36,7 @@ do
     Console.WriteLine("Символ?");
     string? simbol2 = Console.ReadLine();
 
-    char sim = Convert.ToChar(simbol);
+    char sim = Convert.ToChar(simbol2);
 
     for (int i = wigth1 / 2; i > 0; i--)
     {
@@ -60,7 +60,7 @@ do
     Console.WriteLine("Символ?");
     string? simbol0 = Console.ReadLine();
 
-    char s0 = Convert.ToChar(simbol);
+    char s0 = Convert.ToChar(simbol0);
 
     Console.WriteLine("");
 
