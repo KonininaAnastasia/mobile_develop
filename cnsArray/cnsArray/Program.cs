@@ -27,4 +27,4 @@ Console.WriteLine();
 
 Array.Resize<string>(ref cities, 10);
 cities[5] = "Москва";
-Console.WriteLine(String.Join(' ', cities));
+Console.WriteLine(String.Join(' ', cities)); 
