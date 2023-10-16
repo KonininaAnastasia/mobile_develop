@@ -1,6 +1,7 @@
 ﻿
 
 bool isContinue;
+bool isPaint;
 
 do
 {
@@ -15,44 +16,91 @@ do
 
     char s = Convert.ToChar(simbol);
 
-    Console.WriteLine("Направление? [>/<] ->");
+    Console.WriteLine("Направление? [>/<] (по умолчанию >) ->");
 
-    int max_сount = width <= length ? width / 2 : length / 2; // количество прямоугольников и цветов
+    bool direction = Console.ReadLine().ToUpper() == "<" ? true : false;
+
+    int max_сount = width <= length ? width / 2 : length / 2; // количество прямоугольников
 
     int origRow = Console.CursorTop;
     int origCol = Console.CursorLeft;
 
-    static void DrawRectangle(int x, int y, int length_, int width_, char s)
+    if (direction)
     {
-        for (int i = 0; i < width_; i++)
+
+        static void DrawRectangle(int x, int y, int length_, int width_, char s)
         {
-            for (int j = 0; j < length_; j++)
+            for (int i = 0; i < width_; i++)
             {
-                // Проверяем, является ли текущая позиция границей прямоугольника
-                if (i == 0 || i == width_ - 1 || j == 0 || j == length_ - 1)
+                for (int j = 0; j < length_; j++)
                 {
-                    Console.SetCursorPosition(x + j, y + i);
-                    Console.Write(s);
+                    // Проверяем, является ли текущая позиция границей прямоугольника
+                    if ((i == 0 || i == width_ - 1 || j == 0 || j == length_ - 1) && !(i == 1 && j == length_ - 1))
+                    {
+                        Console.SetCursorPosition(x + j, y + i);
+                        Console.Write(s);
+                    }
+                    else if ((i == 2 && j == length_ - 2) && (i != width_ - 2 || j != length_ - 2))
+                    {
+                        Console.SetCursorPosition(x + j, y + i);
+                        Console.Write(s);
+                    }
                 }
             }
         }
-    }
 
-    for (int i = 0; i < max_сount; i++)
+
+        for (int i = 0; i < max_сount; i++)
+        {
+
+            int x = origCol + (i * 2); int y = origRow + (i * 2); // координата, из которой строится прямоугольник
+
+            int length1 = length - (i * 4);
+            int width1 = width - (i * 4); // координата, которой заканчивается прямоугольник
+
+            DrawRectangle(x, y, length1, width1, s);
+
+        }
+
+    }else
     {
+        static void DrawRectangle(int x, int y, int length_, int width_, char s)
+        {
+            for (int i = 0; i < width_; i++)
+            {
+                for (int j = 0; j < length_; j++)
+                {
+                    // Проверяем, является ли текущая позиция границей прямоугольника
+                    if ((i == 0 || i == width_ - 1 || j == 0 || j == length_ - 1) && !(i == 1 && j == 0))
+                    {
+                        Console.SetCursorPosition(x + j, y + i);
+                        Console.Write(s);
+                    }
+                    else if ((i == 2 && j == 1) && (i != width_ - 2 && j != length_ - 2))
+                    {
+                        Console.SetCursorPosition(x + j, y + i);
+                        Console.Write(s);
+                    }
+                }
+            }
+        }
 
-        int x = origCol + i; int y = origRow + i; // координата, из которой строится прямоугольник
 
-        int length1 = length - (i * 2);
-        int width1 = width - (i * 2); // координата, которой заканчивается прямоугольник
+        for (int i = 0; i < max_сount; i++)
+        {
 
-        DrawRectangle(x, y, length1, width1, s);
+            int x = origCol + (i * 2); int y = origRow + (i * 2); // координата, из которой строится прямоугольник
 
-    }
+            int length1 = length - (i * 4);
+            int width1 = width - (i * 4); // координата, которой заканчивается прямоугольник
 
+            DrawRectangle(x, y, length1, width1, s);
+
+        }
+    } 
 
     Console.SetCursorPosition(0, origRow + width + 1);
-    Console.ResetColor();
+
 
     /*    string space1 = "";
 
