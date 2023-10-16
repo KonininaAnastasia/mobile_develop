@@ -71,12 +71,6 @@ do
                     Console.SetCursorPosition(x + j, y + i);
                     Console.Write(s);
                 }
-
-                if (i == 1 || i == width_ - 2 || j == 1 || j == length_ - 2)
-                {
-                    Console.SetCursorPosition(x + j, y + i);
-                    Console.Write(s);
-                }
             }
         }
     }
@@ -84,10 +78,10 @@ do
     for (int i = 0; i < max_сount; i++)
     {
 
-        int x = origCol + (i * 2); int y = origRow + (i * 2); // координата, из которой строится прямоугольник
+        int x = origCol + i; int y = origRow + i; // координата, из которой строится прямоугольник
 
-        int length1 = length - (i * 4);
-        int width1 = width - (i * 4); // координата, которой заканчивается прямоугольник
+        int length1 = length - (i * 2);
+        int width1 = width - (i * 2); // координата, которой заканчивается прямоугольник
 
         Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), colors[colorIndex]);
 
