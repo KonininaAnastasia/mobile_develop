@@ -21,6 +21,9 @@ namespace wfaControlPuzzle
             StartLocationCells();
 
             this.KeyDown += Form1_KeyDown;
+            this.Text += " : (F1 - собрать, F2 - другой размер, F3/F4 - перемешать)";
+
+
         }
 
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
@@ -117,7 +120,7 @@ namespace wfaControlPuzzle
                 for (int c = 0; c < Cols; c++)   // X
                 {
                     px[r, c] = new PictureBox();
-                    px[r, c].Tag = (r, c);
+                    px[r, c].Tag = (r, c, true);
                     px[r, c].BorderStyle = BorderStyle.FixedSingle;
                     px[r, c].MouseDown += PictureBoxAll_MouseDown;
                     px[r, c].MouseMove += PictureBoxAll_MouseMove;
@@ -149,7 +152,28 @@ namespace wfaControlPuzzle
                         }
 
                     v.Location = p;
+
                 }
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    v.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    (int rr, int cc, bool isRotate) = ((int, int, bool))v.Tag;
+                    v.Tag = (rr, cc, !isRotate);
+                    v.Invalidate();
+                }
+
+                CheckCell(v);
+
+            }
+        }
+
+        private void CheckCell(PictureBox v)
+        {
+            (int rr, int cc, bool isRotate) = ((int, int, bool))v.Tag;
+            if (v.Location == new Point(cc * cellWidth, rr * cellHeight) && isRotate == true)
+            {
+                MessageBox.Show("¬ерно");
             }
         }
 
@@ -175,11 +199,6 @@ namespace wfaControlPuzzle
                 v.BringToFront(); // на верхний уровень перемещаетс€ элемент, который берем
                 v.Cursor = Cursors.Hand;
 
-                if (e.Button == MouseButtons.Right)
-                {
-                    v.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    v.Invalidate();
-                }
             }
         }
     }
