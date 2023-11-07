@@ -1,0 +1,24 @@
+﻿<Window x:Class="wpfEventAttach.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpfEventAttach"
+        mc:Ignorable="d"
+        Title="wpfEventAttach" Height="450" Width="300">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <Button Content="Кнопка 1" Click="Button_Click"/>
+            <Button Content="Кнопка 2" Click="Button_Click"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="5 5 5 5" ButtonBase.Click="Button_Click">
+            <Button Content="Кнопка aaa"/>
+            <Button Content="Кнопка bbb"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" ButtonBase.Click="Button_Click">
+            <RadioButton Content="RadioButton 1"/>
+            <RadioButton Content="RadioButton 2"/>
+        </StackPanel>
+        <ListBox x:Name="lbLogs"/>
+    </DockPanel>
+</Window>
