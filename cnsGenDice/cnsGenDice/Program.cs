@@ -1,6 +1,5 @@
 ﻿
 bool isContinue;
-bool isPaint;
 
 Random rnd = new();
 

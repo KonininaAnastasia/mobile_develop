@@ -3,7 +3,6 @@ using System;
 using System.Text;
 
 bool isContinue;
-bool isPaint;
 
 do
 {
