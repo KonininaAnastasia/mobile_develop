@@ -13,31 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace wpfEventRoute
+namespace wpfWindowsResources
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        Random rnd = new(); 
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            lbName.Items.Clear();
-        }
-
-        private void All_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            lbName.Items.Add($"All_MouseDown \n sender = {sender} \n Source = {e.Source}");
-        }
-
-        private void All_MouseEnter(object sender, MouseEventArgs e)
-        {
-            lbName.Items.Add($"All_MouseEnter \n sender = {sender} \n Source = {e.Source}");
+            this.Resources["Background_Play"] = new SolidColorBrush(
+                Color.FromRgb((byte)rnd.Next(256), (byte)rnd.Next(256), (byte)rnd.Next(256)));
         }
     }
 }
