@@ -8,6 +8,8 @@ namespace wfaGameTrainerAccount
         {
             InitializeComponent();
 
+
+
             g = new Game();
             g.Change += G_Change;
             g.DoReset();

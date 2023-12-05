@@ -1,0 +1,49 @@
+﻿<Window x:Class="wpfBinding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpfBinding"
+        mc:Ignorable="d"
+        Title="wpfBinding" Height="450" Width="300">
+
+    <Window.Resources>
+        <local:Herro x:Key="myHerro" Name="Алладин" Clan="Уличные воришки" HP="95"/>
+        <local:HerroEx x:Key="myHerroAbu" Name="Абу" Description="Маленькая обезьянка"/>
+    </Window.Resources>
+    
+    
+    <StackPanel>
+        <TextBox x:Name="edFIO" Text="Naru"/>
+        <TextBlock Text="{Binding ElementName=edFIO, Path=Text}"/>
+        <TextBlock Text="{Binding ElementName=edFIO, Path=Text,
+            StringFormat=Привет\, {0} {0}!!!}"/>
+        <TextBlock Text="{Binding ElementName=edFIO, Path=Text.Length}"/>
+
+        <TextBox x:Name="edCaption"/>
+        <TextBox x:Name="txtCaption" Background="LightGreen"/>
+
+        <StackPanel Background="LightBlue">
+            <TextBlock Text="{Binding Source={StaticResource myHerro}, Path=Name}"/>
+            <TextBlock Text="{Binding Source={StaticResource myHerro}, Path=Clan}"/>
+            <TextBlock Text="{Binding Source={StaticResource myHerro}, Path=Description}"/>
+            <TextBlock Text="{Binding Source={StaticResource myHerro}, Path=HP}"/>
+        </StackPanel>
+
+        <StackPanel Background="LemonChiffon" DataContext="{StaticResource myHerro}">
+            <TextBlock Text="{Binding Name}"/>
+            <TextBlock Text="{Binding Clan}"/>
+            <TextBlock Text="{Binding Description}"/>
+            <TextBlock Text="{Binding HP}"/>
+        </StackPanel>
+
+        <StackPanel Background="LemonChiffon" DataContext="{StaticResource myHerroAbu}">
+            <TextBox Text="{Binding Name}"/>
+            <TextBox Text="{Binding Clan}"/>
+            <TextBox Text="{Binding Description}"/>
+            <TextBox Text="{Binding HP}"/>
+            <Button Content="Нажми меня" Click="Button_Click"/>
+        </StackPanel>
+
+    </StackPanel>
+</Window>
