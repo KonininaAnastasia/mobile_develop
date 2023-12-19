@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mauiGeneratorRGB.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <BoxView x:Name="boxview_color" 
+                     WidthRequest="200" 
+                     HeightRequest="200" 
+                     CornerRadius="20"/>
+
+            <Slider x:Name="slider_R" Minimum="0" Maximum="255" Background="Red"/>
+            <Slider x:Name="slider_G" Minimum="0" Maximum="255" Background="Green"/>
+            <Slider x:Name="slider_B" Minimum="0" Maximum="255" Background="Blue"/>
+
+            <Button x:Name="buRandomColor" Text="Случайный цвет"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
