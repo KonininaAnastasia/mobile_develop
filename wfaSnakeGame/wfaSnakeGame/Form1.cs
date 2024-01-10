@@ -17,15 +17,12 @@ namespace wfaSnakeGame
         {
             InitializeComponent();
 
-            // Настройка формы и создание начальных значений
             snake = new List<Point>();
             snake.Add(new Point(panel1.Width / 2, panel1.Height / 2));
 
             rnd = new Random();
             food = new Point(rnd.Next(20, panel1.Width-20),rnd.Next(20, panel1.Height-20));        
 
-            // Настраиваем обработчики событий для клавиш
-            this.KeyDown += Form1_KeyDown;
 
             // Запускаем игру
             gameTimer.Tick += GameTimer_Tick;
@@ -34,6 +31,8 @@ namespace wfaSnakeGame
             gameTimer.Interval = 10;
 
             panel1.Paint += Panel1_Paint;
+
+            this.KeyDown += Form1_KeyDown;
 
             bu_Up.Click += (s,e) => Move(Direction.Up);
             bu_Down.Click += (s,e) => Move(Direction.Down);
@@ -125,7 +124,8 @@ namespace wfaSnakeGame
             snake.Insert(0, newHead);
 
             // Проверка на столкновение с едой
-            if (head.X >= food.X && head.X < (food.X + 20) && head.Y >= food.Y && head.Y < (food.Y + 20))
+            if (newHead.X >= food.X && (newHead.X+10) <= (food.X + 10) && 
+                newHead.Y >= food.Y && (newHead.Y + 10) <= (food.Y + 10))
             {
                 // Генерация новой позиции для еды
                 food = new Point(rnd.Next(20, panel1.Width-20), rnd.Next(20, panel1.Height-20));
@@ -145,8 +145,8 @@ namespace wfaSnakeGame
             }
 
             // Проверка на столкновение со стенами
-            if (newHead.X < -10 || newHead.X >= panel1.Width+10 ||
-                newHead.Y < -10 || newHead.Y >= panel1.Height+10)
+            if (newHead.X < -5 || newHead.X >= panel1.Width+5 ||
+                newHead.Y < -5 || newHead.Y >= panel1.Height+5)
             {
                 // Игра окончена, змейка столкнулась со стеной
                 gameTimer.Stop();
@@ -155,7 +155,7 @@ namespace wfaSnakeGame
             else
             {
                 // Отрисовка змейки и еды
-                panel1.Invalidate(new Rectangle(newHead, new Size(20, 20)));
+                panel1.Invalidate(new Rectangle(newHead, new Size(100, 20)));
                 panel1.Invalidate(new Rectangle(food, new Size(10, 10)));
             }
             
@@ -165,7 +165,6 @@ namespace wfaSnakeGame
 
     public enum Direction
     {
-        None,
         Up,
         Down,
         Left,

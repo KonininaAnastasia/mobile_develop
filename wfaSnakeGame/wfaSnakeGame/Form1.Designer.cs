@@ -100,7 +100,7 @@
             MaximumSize = new Size(516, 586);
             MinimumSize = new Size(516, 586);
             Name = "Form1";
-            Text = "Form1";
+            Text = "SnakeGame";
             ResumeLayout(false);
         }
 
