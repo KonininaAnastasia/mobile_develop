@@ -25,7 +25,7 @@ namespace wfaPhoto
             bu_delete.Click += Bu_delete_Click;
             bu_clear.Click += Bu_newPage_Click;
 
-            treeView1.DoubleClick += (s, e) => page.OpenLvSave(treeView1, panel1);
+            treeView1.DoubleClick += (s, e) => page.OpenPanelSave(treeView1, panel1);
 
             bu_Photo.Click += Bu_Photo_Click;
         }

@@ -14,7 +14,7 @@ namespace wfaPhoto
         public PictureBox picture { get; set; }
         public PictureBox pictureSave { get; set; }
 
-        public int count_lvSave = 1;
+        public int count_PanelSave = 1;
         private Point mouseOffset;
         private bool isDragging;
 
@@ -118,6 +118,7 @@ namespace wfaPhoto
 
             TreeNode selectedNode = treeView.SelectedNode;
 
+            // Проверка, что выбран элемент и у него есть сохраненный Panel
             if (selectedNode != null && selectedNode.Tag is Panel savedPanel)
             {
                 // Обновление параметров для выбранного узла
@@ -150,7 +151,7 @@ namespace wfaPhoto
             {
                 PanelSave = new Panel();
 
-                string itemText = "Страница №" + count_lvSave;
+                string itemText = "Страница №" + count_PanelSave;
                 TreeNode newItem = new TreeNode(itemText);
 
                 foreach (Control control in PanelWork.Controls)
@@ -172,19 +173,18 @@ namespace wfaPhoto
                 newItem.Tag = PanelWork;
                 treeView.Nodes.Add(newItem);
 
-                count_lvSave++;
+                count_PanelSave++;
 
             }
 
-            PanelSave.Controls.Clear();
+            //PanelSave.Controls.Clear();
 
         }
 
-        internal void OpenLvSave(TreeView treeView, Panel panel)
+        internal void OpenPanelSave(TreeView treeView, Panel panel)
         {
             TreeNode selectedNode = treeView.SelectedNode;
 
-            // Проверка, что выбран элемент и у него есть сохраненный Panel
             if (selectedNode != null && selectedNode.Tag is Panel savedPanel)
             {
                 panel.Controls.Clear();
@@ -231,17 +231,7 @@ namespace wfaPhoto
             // Проверка, что выбран элемент в дереве
             if (selectedNode != null)
             {
-                // Проверка, что выбранный узел является родителем
-                if (selectedNode.Parent != null)
-                {
-                    // Удаление выбранного узла из родительского узла
-                    selectedNode.Parent.Nodes.Remove(selectedNode);
-                }
-                else
-                {
-                    // Удаление выбранного корневого узла
-                    treeView.Nodes.Remove(selectedNode);
-                }
+                treeView.Nodes.Remove(selectedNode);
             }
         }
 
@@ -254,7 +244,6 @@ namespace wfaPhoto
 
         internal void Insert_Photo()
         {
-
             picture = new PictureBox();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -263,7 +252,6 @@ namespace wfaPhoto
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-
                 string selectedImagePath = openFileDialog.FileName;
                 picture.Image = Image.FromFile(selectedImagePath);
 
