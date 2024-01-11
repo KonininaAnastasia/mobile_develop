@@ -10,6 +10,7 @@ namespace wfaSnakeGame
         private Point food;               
         private Random rnd;
         private bool isFoodEaten = false;
+        private Button startButton;
 
         private Direction currentDirection;
 
@@ -17,11 +18,26 @@ namespace wfaSnakeGame
         {
             InitializeComponent();
 
+            startButton = new Button();
+            startButton.Text = "Начать игру";
+            startButton.Size = new Size(100, 30);
+            startButton.Location = new Point((panel1.Width - startButton.Width) / 2, (panel1.Height - startButton.Height) / 2);
+
+            panel1.Controls.Add(startButton);
+
+            startButton.Click += StartButton_Click;
+
+        }
+
+        private void StartButton_Click(object? sender, EventArgs e)
+        {
+            panel1.Controls.Remove(startButton);
+
             snake = new List<Point>();
             snake.Add(new Point(panel1.Width / 2, panel1.Height / 2));
 
             rnd = new Random();
-            food = new Point(rnd.Next(20, panel1.Width-20),rnd.Next(20, panel1.Height-20));        
+            food = new Point(rnd.Next(20, panel1.Width - 20), rnd.Next(20, panel1.Height - 20));
 
 
             // Запускаем игру
@@ -34,11 +50,10 @@ namespace wfaSnakeGame
 
             this.KeyDown += Form1_KeyDown;
 
-            bu_Up.Click += (s,e) => Move(Direction.Up);
-            bu_Down.Click += (s,e) => Move(Direction.Down);
-            bu_Right.Click += (s,e) => Move(Direction.Right);
-            bu_Left.Click += (s,e) => Move(Direction.Left);
-
+            bu_Up.Click += (s, e) => Move(Direction.Up);
+            bu_Down.Click += (s, e) => Move(Direction.Down);
+            bu_Right.Click += (s, e) => Move(Direction.Right);
+            bu_Left.Click += (s, e) => Move(Direction.Left);
         }
 
         private void Panel1_Paint(object? sender, PaintEventArgs e)
@@ -94,7 +109,6 @@ namespace wfaSnakeGame
 
         private void Move(Direction? direction)
         {
-            
             // Добавление новой головы змейки
             var head = snake.First();
             var newHead = head;
@@ -124,8 +138,10 @@ namespace wfaSnakeGame
             snake.Insert(0, newHead);
 
             // Проверка на столкновение с едой
-            if (newHead.X >= food.X && (newHead.X+10) <= (food.X + 10) && 
-                newHead.Y >= food.Y && (newHead.Y + 10) <= (food.Y + 10))
+            if (((newHead.X >= food.X && newHead.X < (food.X + 10)) || 
+                ((newHead.X + 10) >= food.X && (newHead.X + 10) < (food.X + 10))) && 
+                ((newHead.Y >= food.Y && newHead.Y < (food.Y + 10)) ||
+                ((newHead.Y + 10) >= food.Y && (newHead.Y + 10) < (food.Y + 10))))
             {
                 // Генерация новой позиции для еды
                 food = new Point(rnd.Next(20, panel1.Width-20), rnd.Next(20, panel1.Height-20));
@@ -144,6 +160,18 @@ namespace wfaSnakeGame
                 isFoodEaten = false;
             }
 
+            if (isFoodEaten)
+            {
+                if (gameTimer.Interval < 2)
+                {
+                    gameTimer.Interval = 1; // Минимальный интервал таймера
+                }
+                else
+                {
+                    gameTimer.Interval -= 1;
+                }
+            }
+
             // Проверка на столкновение со стенами
             if (newHead.X < -5 || newHead.X >= panel1.Width+5 ||
                 newHead.Y < -5 || newHead.Y >= panel1.Height+5)
@@ -155,7 +183,7 @@ namespace wfaSnakeGame
             else
             {
                 // Отрисовка змейки и еды
-                panel1.Invalidate(new Rectangle(newHead, new Size(100, 20)));
+                panel1.Invalidate(new Rectangle(newHead, new Size(200, 20)));
                 panel1.Invalidate(new Rectangle(food, new Size(10, 10)));
             }
             
