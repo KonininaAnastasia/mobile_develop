@@ -30,11 +30,11 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
-            bu_Up = new Button();
-            bu_Down = new Button();
-            bu_Left = new Button();
-            bu_Right = new Button();
             gameTimer = new System.Windows.Forms.Timer(components);
+            lb_Right = new Label();
+            lb_Up = new Label();
+            lb_Down = new Label();
+            lb_Left = new Label();
             SuspendLayout();
             // 
             // panel1
@@ -46,55 +46,67 @@
             panel1.Size = new Size(323, 276);
             panel1.TabIndex = 0;
             // 
-            // bu_Up
+            // lb_Right
             // 
-            bu_Up.Anchor = AnchorStyles.Bottom;
-            bu_Up.Location = new Point(118, 295);
-            bu_Up.Name = "bu_Up";
-            bu_Up.Size = new Size(103, 42);
-            bu_Up.TabIndex = 1;
-            bu_Up.Text = "▲";
-            bu_Up.UseVisualStyleBackColor = true;
+            lb_Right.Anchor = AnchorStyles.Bottom;
+            lb_Right.AutoSize = true;
+            lb_Right.BorderStyle = BorderStyle.FixedSingle;
+            lb_Right.Location = new Point(227, 317);
+            lb_Right.MinimumSize = new Size(103, 42);
+            lb_Right.Name = "lb_Right";
+            lb_Right.Size = new Size(103, 42);
+            lb_Right.TabIndex = 5;
+            lb_Right.Text = "▶";
+            lb_Right.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // bu_Down
+            // lb_Up
             // 
-            bu_Down.Anchor = AnchorStyles.Bottom;
-            bu_Down.Location = new Point(118, 341);
-            bu_Down.Name = "bu_Down";
-            bu_Down.Size = new Size(103, 42);
-            bu_Down.TabIndex = 2;
-            bu_Down.Text = "▼";
-            bu_Down.UseVisualStyleBackColor = true;
+            lb_Up.Anchor = AnchorStyles.Bottom;
+            lb_Up.AutoSize = true;
+            lb_Up.BorderStyle = BorderStyle.FixedSingle;
+            lb_Up.Location = new Point(118, 294);
+            lb_Up.MinimumSize = new Size(103, 42);
+            lb_Up.Name = "lb_Up";
+            lb_Up.Size = new Size(103, 42);
+            lb_Up.TabIndex = 6;
+            lb_Up.Text = "▲";
+            lb_Up.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // bu_Left
+            // lb_Down
             // 
-            bu_Left.Anchor = AnchorStyles.Bottom;
-            bu_Left.Location = new Point(9, 317);
-            bu_Left.Name = "bu_Left";
-            bu_Left.Size = new Size(103, 42);
-            bu_Left.TabIndex = 3;
-            bu_Left.Text = "◀";
-            bu_Left.UseVisualStyleBackColor = true;
+            lb_Down.Anchor = AnchorStyles.Bottom;
+            lb_Down.AutoSize = true;
+            lb_Down.BorderStyle = BorderStyle.FixedSingle;
+            lb_Down.Location = new Point(118, 340);
+            lb_Down.MinimumSize = new Size(103, 42);
+            lb_Down.Name = "lb_Down";
+            lb_Down.Size = new Size(103, 42);
+            lb_Down.TabIndex = 7;
+            lb_Down.Text = "▼";
+            lb_Down.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // bu_Right
+            // lb_Left
             // 
-            bu_Right.Anchor = AnchorStyles.Bottom;
-            bu_Right.Location = new Point(227, 318);
-            bu_Right.Name = "bu_Right";
-            bu_Right.Size = new Size(103, 42);
-            bu_Right.TabIndex = 4;
-            bu_Right.Text = "▶";
-            bu_Right.UseVisualStyleBackColor = true;
+            lb_Left.Anchor = AnchorStyles.Bottom;
+            lb_Left.AutoSize = true;
+            lb_Left.BorderStyle = BorderStyle.FixedSingle;
+            lb_Left.Location = new Point(9, 317);
+            lb_Left.MinimumSize = new Size(103, 42);
+            lb_Left.Name = "lb_Left";
+            lb_Left.Size = new Size(103, 42);
+            lb_Left.TabIndex = 8;
+            lb_Left.Text = "◀";
+            lb_Left.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(347, 389);
-            Controls.Add(bu_Right);
-            Controls.Add(bu_Left);
-            Controls.Add(bu_Down);
-            Controls.Add(bu_Up);
+            Controls.Add(lb_Left);
+            Controls.Add(lb_Down);
+            Controls.Add(lb_Up);
+            Controls.Add(lb_Right);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximumSize = new Size(516, 586);
@@ -102,15 +114,17 @@
             Name = "Form1";
             Text = "SnakeGame";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Panel panel1;
-        private Button bu_Up;
-        private Button bu_Down;
-        private Button bu_Left;
         private Button bu_Right;
         private System.Windows.Forms.Timer gameTimer;
+        private Label lb_Right;
+        private Label lb_Up;
+        private Label lb_Down;
+        private Label lb_Left;
     }
 }

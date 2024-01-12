@@ -11,7 +11,7 @@ namespace wfaSnakeGame
         private Random rnd;
         private bool isFoodEaten = false;
         private Button startButton;
-
+        private Button restartButton;
         private Direction currentDirection;
 
         public Form1()
@@ -26,6 +26,8 @@ namespace wfaSnakeGame
             panel1.Controls.Add(startButton);
 
             startButton.Click += StartButton_Click;
+
+            this.KeyPreview = true;
 
         }
 
@@ -50,10 +52,10 @@ namespace wfaSnakeGame
 
             this.KeyDown += Form1_KeyDown;
 
-            bu_Up.Click += (s, e) => Move(Direction.Up);
-            bu_Down.Click += (s, e) => Move(Direction.Down);
-            bu_Right.Click += (s, e) => Move(Direction.Right);
-            bu_Left.Click += (s, e) => Move(Direction.Left);
+            lb_Up.Click += (s, e) => Move(Direction.Up);
+            lb_Down.Click += (s, e) => Move(Direction.Down);
+            lb_Right.Click += (s, e) => Move(Direction.Right);
+            lb_Left.Click += (s, e) => Move(Direction.Left);
         }
 
         private void Panel1_Paint(object? sender, PaintEventArgs e)
@@ -137,6 +139,8 @@ namespace wfaSnakeGame
 
             snake.Insert(0, newHead);
 
+
+
             // Проверка на столкновение с едой
             if (((newHead.X >= food.X && newHead.X < (food.X + 10)) || 
                 ((newHead.X + 10) >= food.X && (newHead.X + 10) < (food.X + 10))) && 
@@ -172,13 +176,21 @@ namespace wfaSnakeGame
                 }
             }
 
-            // Проверка на столкновение со стенами
+            // Проверка на столкновение со стенами или сама с собой
             if (newHead.X < -5 || newHead.X >= panel1.Width+5 ||
-                newHead.Y < -5 || newHead.Y >= panel1.Height+5)
+                newHead.Y < -5 || newHead.Y >= panel1.Height+5 ||
+                (snake.Count > 1 && snake.Skip(1).Any(p => p == newHead)))
             {
                 // Игра окончена, змейка столкнулась со стеной
                 gameTimer.Stop();
                 MessageBox.Show("Вы проиграли!");
+
+                restartButton = new Button();
+                restartButton.Text = "Начать заново";
+                restartButton.Size = new Size(200, 30);
+                restartButton.Location = new Point((panel1.Width - restartButton.Width) / 2, (panel1.Height - restartButton.Height) / 2);
+                panel1.Controls.Add(restartButton);
+                restartButton.Click += RestartButton_Click;
             }
             else
             {
@@ -189,6 +201,21 @@ namespace wfaSnakeGame
             
         }
 
+        private void RestartButton_Click(object? sender, EventArgs e)
+        {
+            panel1.Controls.Remove(restartButton);
+            restartButton = null;
+
+            panel1.Invalidate();
+
+            snake.Clear();
+            snake.Add(new Point(panel1.Width / 2, panel1.Height / 2));
+
+            rnd = new Random();
+            food = new Point(rnd.Next(20, panel1.Width - 20), rnd.Next(20, panel1.Height - 20));
+
+            gameTimer.Start();
+        }
     }
 
     public enum Direction
