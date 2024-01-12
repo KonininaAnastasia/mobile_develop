@@ -8,11 +8,15 @@
         Title="wpfWindow" Height="500" Width="300">
 
     <Window.Resources>
+        
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
         </Style>
+        
         <Style x:Key="Bu_Icon" TargetType="Button">
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="AliceBlue"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="40"/>
             <Style.Triggers>
@@ -34,14 +38,36 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="30"/>
             <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
+        
         <Style TargetType="Image">
             <Setter Property="Width" Value="30"/>
             <Setter Property="Height" Value="30"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.2" To="40" Storyboard.TargetProperty="Height"/>
+                            <DoubleAnimation Duration="0:0:0.2" To="40" Storyboard.TargetProperty="Width"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.2" To="30" Storyboard.TargetProperty="Height"/>
+                            <DoubleAnimation Duration="0:0:0.2" To="30" Storyboard.TargetProperty="Width"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
+        
         <Style x:Key="Reg" TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="30"/>
@@ -60,42 +86,46 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Blue"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                     <Setter Property="FontSize" Value="15"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
     </Window.Resources>
 
 
 
-
-    <StackPanel Margin="20">
-        <Label Content="Регистрация:" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <Label Content="Имя"/>
-        <TextBox/>
-        <Label Content="Логин"/>
-        <TextBox/>
-        <Label Content="Пароль"/>
-        <TextBox/>
-        <Label Content="Повторите пароль"/>
-        <TextBox/>
-        <CheckBox Content="Запомнить меня" Margin="5"/>
-        <Button Style="{StaticResource Reg}" Content="Зарегистрироваться"/>
-        <Label Content="Зарегистрироваться через:"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Style="{StaticResource Bu_Icon}">
-                <Image Source="/Resources/1.png"/>
-            </Button>
-            <Button Style="{StaticResource Bu_Icon}">
-                <Image Source="/Resources/2.png"/>
-            </Button>
-            <Button Style="{StaticResource Bu_Icon}">
-                <Image Source="/Resources/3.png"/>
-            </Button>
+    <Grid Background="AliceBlue">
+            <StackPanel Margin="20">
+            <Label Content="Регистрация:" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center"/>
+            <Label Content="Имя"/>
+            <TextBox/>
+            <Label Content="Логин"/>
+            <TextBox/>
+            <Label Content="Пароль"/>
+            <TextBox/>
+            <Label Content="Повторите пароль"/>
+            <TextBox/>
+            <CheckBox Content="Запомнить меня" Margin="5"/>
+            <Button Style="{StaticResource Reg}" Content="Зарегистрироваться"/>
+            <Label Content="Зарегистрироваться через:"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource Bu_Icon}">
+                    <Image Source="/Resources/1.png"/>
+                </Button>
+                <Button Style="{StaticResource Bu_Icon}">
+                    <Image Source="/Resources/2.png"/>
+                </Button>
+                <Button Style="{StaticResource Bu_Icon}">
+                    <Image Source="/Resources/3.png"/>
+                </Button>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 
 
 </Window>
